@@ -1,10 +1,19 @@
 // Import required modules
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');  // Import CORS package
 require('dotenv').config(); // Load environment variables from .env file
 
 // Initialize the Express app
 const app = express();
+
+// Middleware to enable CORS (allow frontend to make requests)
+const corsOptions = {
+    origin: 'http://localhost:3000',  // Replace with your frontend URL in production
+    methods: 'GET,POST,PUT,DELETE',  // Allowed HTTP methods
+    allowedHeaders: 'Content-Type, Authorization',  // Allowed headers
+};
+app.use(cors(corsOptions));  // Enable CORS with the specified options
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -41,6 +50,10 @@ app.get('/', (req, res) => {
 // Add user routes
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
+
+// Add discussion routes
+const discussionRoutes = require('./routes/discussionRoutes'); // Make sure the path is correct
+app.use('/api', discussionRoutes);  // Prefix the discussion routes with /api
 
 // Start the server
 const PORT = process.env.PORT || 5000;
