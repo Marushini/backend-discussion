@@ -9,6 +9,9 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Debug: Log MongoDB URI for troubleshooting
+console.log('MongoDB URI:', process.env.MONGO_URI);
+
 // MongoDB URI from the environment variables
 const mongoURI = process.env.MONGO_URI;
 
@@ -21,12 +24,12 @@ if (!mongoURI) {
 // Connect to MongoDB using Mongoose
 mongoose
     .connect(mongoURI, {
-        useNewUrlParser: true,
+        useNewUrlParser: true,  // These options are fine for Mongoose 5.x
         useUnifiedTopology: true,
     })
     .then(() => console.log('MongoDB connected successfully'))
     .catch((err) => {
-        console.error('MongoDB connection error:', err);
+        console.error('MongoDB connection error:', err.message);
         process.exit(1); // Exit the process on connection failure
     });
 
