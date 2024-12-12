@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 
-const discussionSchema = new mongoose.Schema({
+// Define the schema for a discussion
+const DiscussionSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
     },
-    content: {
+    description: {
         type: String,
         required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    createdBy: {
+        type: String,
+        required: true,
     },
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Discussion', discussionSchema);
+module.exports = mongoose.model('Discussion', DiscussionSchema);

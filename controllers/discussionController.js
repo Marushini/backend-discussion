@@ -12,11 +12,15 @@ const getAllDiscussions = async (req, res) => {
 
 // Create a new discussion
 const createDiscussion = async (req, res) => {
-    const { title, content } = req.body;
+    const { title, description, createdBy } = req.body;
+
     try {
-        const discussion = new Discussion({ title, content });
+        const discussion = new Discussion({ title, description, createdBy });
         const savedDiscussion = await discussion.save();
-        res.status(201).json(savedDiscussion);
+        res.status(201).json({
+            message: 'Discussion created successfully',
+            discussion: savedDiscussion,
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
