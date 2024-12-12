@@ -7,3 +7,4 @@ router.get('/', getAllDiscussions);
 router.post('/', createDiscussion);
 
 module.exports = router;
+
