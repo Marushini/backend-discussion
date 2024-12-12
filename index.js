@@ -1,42 +1,46 @@
-// Importing required modules
+// Import required modules
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); // For loading environment variables from .env file
+require('dotenv').config(); // Load environment variables from .env file
 
-// Initialize the app
+// Initialize the Express app
 const app = express();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Get the MongoDB URI from the environment variable
+// MongoDB URI from the environment variables
 const mongoURI = process.env.MONGO_URI;
 
-// Connect to MongoDB
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => {
-    console.log('MongoDB connected successfully');
-})
-.catch((error) => {
-    console.error('MongoDB connection error:', error);
-});
+// Check if the MongoDB URI is defined
+if (!mongoURI) {
+    console.error('MongoDB URI is not defined. Please set the MONGO_URI environment variable.');
+    process.exit(1); // Exit the process with an error
+}
 
-// Basic route for testing
+// Connect to MongoDB using Mongoose
+mongoose
+    .connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
+        process.exit(1); // Exit the process on connection failure
+    });
+
+// Define a basic route for testing
 app.get('/', (req, res) => {
     res.send('Backend server is running');
 });
 
-// Your routes can be added here, for example:
+// Add user routes
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
 
-// Specify the port your app will listen on
-const PORT = process.env.PORT || 5000;
-
 // Start the server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
