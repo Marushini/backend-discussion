@@ -1,11 +1,15 @@
 const express = require('express');
-const { registerUser, loginUser } = require('../controllers/UserController'); // Correct import
 const router = express.Router();
 
-// Register route
-router.post('/register', registerUser);
+// Example route for registering a user
+router.post('/register', (req, res) => {
+    // Logic for user registration
+    res.send('User registered successfully');
+});
 
-// Login route
-router.post('/login', loginUser);
+// Example route for getting all users
+router.get('/', (req, res) => {
+    res.send('List of users');
+});
 
 module.exports = router;
