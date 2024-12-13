@@ -1,11 +1,17 @@
 const express = require('express');
-const router = express.Router();
+const cors = require('cors');
 const { getAllDiscussions, createDiscussion } = require('../controllers/discussionController');
 
-// Post a new discussion
-router.post('/discussion', createDiscussion);
+const router = express.Router();
 
-// Get all discussions
+// Apply CORS to all routes in this file
+router.use(cors({
+  origin: ['http://localhost:5173', 'https://frontend-discussion.vercel.app'], // Allowed origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+}));
+
+// Define routes
 router.get('/discussions', getAllDiscussions);
+router.post('/discussions', createDiscussion);
 
 module.exports = router;

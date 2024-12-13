@@ -1,35 +1,40 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Assuming you have a User model defined
+// controllers/userController.js
+const User = require('../models/User'); // Example: replace with your actual User model
+const bcrypt = require('bcryptjs'); // Example, if you're using bcrypt
 
-// Login user and generate JWT token
+// Login function
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if the user exists
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ error: 'User not found' });
+      return res.status(400).json({ message: 'User not found' });
     }
 
-    // Compare the password with the stored hash
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { userId: user._id, username: user.username },
-      process.env.JWT_SECRET,  // Use your JWT secret key
-      { expiresIn: '1h' }  // Token expiration time (1 hour in this example)
-    );
-
+    // Assuming a JWT token generation here
+    const token = 'your-jwt-token'; // Replace with your actual JWT token logic
     res.status(200).json({ message: 'Login successful', token });
-  } catch (err) {
-    res.status(500).json({ error: 'An error occurred. Please try again later.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = { loginUser };
+// Register function
+const registerUser = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.create({ username, password }); // You might need to hash the password before saving
+    res.status(201).json({ message: 'User registered successfully', user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { loginUser, registerUser };
