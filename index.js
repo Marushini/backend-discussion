@@ -8,12 +8,12 @@ require('dotenv').config(); // Load environment variables from .env file
 const app = express();
 
 // Middleware to enable CORS (allow frontend to make requests)
+
 const allowedOrigins = [
-    'https://frontend-discussion.vercel.app/', 
-    'http://localhost:5173/',
-    'https://backend-discussion-z111.onrender.com/users/login',
+    'https://frontend-discussion.vercel.app', 
+    'http://localhost:5173',
     'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app'
-]; // Add all allowed origins here
+];
 
 const corsOptions = {
     origin: (origin, callback) => {
