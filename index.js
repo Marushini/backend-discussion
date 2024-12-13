@@ -9,7 +9,8 @@ const app = express();
 
 // Middleware to enable CORS (allow frontend to make requests)
 const allowedOrigins = [
-    'https://frontend-discussion.vercel.app', 
+    'https://frontend-discussion.vercel.app/', 
+    'http://localhost:5173/',
     'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app'
 ]; // Add all allowed origins here
 
