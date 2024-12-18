@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { getAllDiscussions, createDiscussion } = require('../controllers/discussionController');
+const { likeDiscussion, dislikeDiscussion } = require('../controllers/discussionController'); // Import the like and dislike controllers
 
 const router = express.Router();
 
@@ -13,5 +14,9 @@ router.use(cors({
 // Define routes
 router.get('/discussions', getAllDiscussions);
 router.post('/discussion', createDiscussion);
+
+// Like and dislike routes
+router.post('/discussion/:id/like', likeDiscussion);
+router.post('/discussion/:id/dislike', dislikeDiscussion);
 
 module.exports = router;
