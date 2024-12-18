@@ -12,6 +12,6 @@ router.use(cors({
 
 // Define routes
 router.get('/discussions', getAllDiscussions);
-router.post('/discussions', createDiscussion);
+router.post('/discussion', createDiscussion);
 
 module.exports = router;

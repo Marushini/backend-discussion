@@ -18,7 +18,7 @@ const loginUser = async (req, res) => {
     }
 
     // Assuming a JWT token generation here
-    const token = 'your-jwt-token'; // Replace with your actual JWT token logic
+    const token = 123456; // Replace with your actual JWT token logic
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
     res.status(500).json({ error: error.message });
