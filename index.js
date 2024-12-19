@@ -8,13 +8,11 @@ require('dotenv').config(); // Load environment variables from .env file
 const app = express();
 
 // Middleware to enable CORS (allow frontend to make requests)
-
 const allowedOrigins = [
-    'https://frontend-discussion.vercel.app', 
-    'http://localhost:5173',
-    
-    'https://frontend-discussion.vercel.app/discussion',
-    'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app'
+    'http://localhost:5173', // Local frontend during development
+    'https://frontend-discussion.vercel.app', // Production frontend
+    'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app', // Another production frontend
+    'https://frontend-discussion.vercel.app/discussion', // Specific URL for discussion
 ];
 
 const corsOptions = {
@@ -34,9 +32,6 @@ app.use(cors(corsOptions)); // Enable CORS with the specified options
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-
-// Debug: Log MongoDB URI for troubleshooting
-console.log('MongoDB URI:', process.env.MONGO_URI);
 
 // MongoDB URI from the environment variables
 const mongoURI = process.env.MONGO_URI;

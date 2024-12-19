@@ -11,7 +11,8 @@ const DiscussionSchema = new mongoose.Schema(
       required: true,
     },
     createdBy: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,  // Reference to User model
+      ref: 'User',
       required: true,
     },
     likeCount: {
@@ -23,12 +24,25 @@ const DiscussionSchema = new mongoose.Schema(
       default: 0, // Initialize dislike count to 0
     },
     replies: [{  // Array to store replies for each discussion
-      replyText: { type: String, required: true }, // The text of the reply
-      repliedBy: { type: String, required: true }, // Username or ID of the person replying
-      createdAt: { type: Date, default: Date.now }, // Date when the reply was created
+      replyText: { 
+        type: String, 
+        required: true, 
+        trim: true,  // Trim spaces from replies
+      },
+      repliedBy: { 
+        type: mongoose.Schema.Types.ObjectId,  // Reference to User model
+        ref: 'User',
+        required: true, 
+      },
+      createdAt: { 
+        type: Date, 
+        default: Date.now, 
+      },
     }],
   },
-  { timestamps: true }
+  { timestamps: true }  // Automatically adds createdAt and updatedAt to discussion
 );
+
+// You can optionally add custom methods or virtuals here for additional functionality
 
 module.exports = mongoose.model('Discussion', DiscussionSchema);

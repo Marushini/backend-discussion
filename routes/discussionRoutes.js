@@ -1,14 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const { getAllDiscussions, createDiscussion } = require('../controllers/discussionController');
-const { likeDiscussion, dislikeDiscussion } = require('../controllers/discussionController'); // Import the like and dislike controllers
-const { addReply } = require('../controllers/discussionController'); // Import the addReply controller
+const {
+  getAllDiscussions,
+  createDiscussion,
+  likeDiscussion,
+  dislikeDiscussion,
+  addReply
+} = require('../controllers/discussionController');
 
 const router = express.Router();
 
 // Apply CORS to all routes in this file
 router.use(cors({
-  origin: ['http://localhost:5173','https://vercel.live/toolbar/session', 'https://frontend-discussion.vercel.app'], // Allowed origins
+  origin: ['http://localhost:5173', 'https://vercel.live/toolbar/session', 'https://frontend-discussion.vercel.app'], // Allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
 }));
 
