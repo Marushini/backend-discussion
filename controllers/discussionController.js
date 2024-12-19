@@ -60,33 +60,9 @@ const dislikeDiscussion = async (req, res) => {
     }
 };
 
-// Add a reply to a discussion post
-const addReply = async (req, res) => {
-    const { postId, replyText, username } = req.body;
-
-    try {
-        const discussion = await Discussion.findById(postId);
-        if (!discussion) {
-            return res.status(404).json({ message: 'Discussion not found' });
-        }
-
-        // Add the new reply to the replies array
-        discussion.replies.push({
-            username,
-            replyText,
-        });
-
-        await discussion.save(); // Save the updated discussion post
-        res.status(200).json({ message: 'Reply added successfully', discussion });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
 module.exports = {
     getAllDiscussions,
     createDiscussion,
     likeDiscussion,
     dislikeDiscussion,
-    addReply, // Export the addReply function
 };
