@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Apply CORS to all routes in this file
 router.use(cors({
-  origin: ['http://localhost:5173', 'https://frontend-discussion.vercel.app'], // Allowed origins
+  origin: ['http://localhost:5173','https://vercel.live/toolbar/session', 'https://frontend-discussion.vercel.app'], // Allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
 }));
 
