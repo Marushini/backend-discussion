@@ -22,6 +22,11 @@ const DiscussionSchema = new mongoose.Schema(
       type: Number,
       default: 0, // Initialize dislike count to 0
     },
+    replies: [{  // Array to store replies for each discussion
+      replyText: { type: String, required: true }, // The text of the reply
+      repliedBy: { type: String, required: true }, // Username or ID of the person replying
+      createdAt: { type: Date, default: Date.now }, // Date when the reply was created
+    }],
   },
   { timestamps: true }
 );
