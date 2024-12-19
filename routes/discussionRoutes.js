@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { getAllDiscussions, createDiscussion } = require('../controllers/discussionController');
-const { likeDiscussion, dislikeDiscussion } = require('../controllers/discussionController'); // Import the like and dislike controllers
+const { getAllDiscussions, createDiscussion, likeDiscussion, dislikeDiscussion, addReply } = require('../controllers/discussionController');
 
 const router = express.Router();
 
@@ -11,12 +10,15 @@ router.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
 }));
 
-// Define routes
-router.get('/discussions', getAllDiscussions);
-router.post('/discussion', createDiscussion);
+// Define routes for discussions
+router.get('/discussions', getAllDiscussions); // Get all discussions
+router.post('/discussion', createDiscussion); // Create a new discussion
 
 // Like and dislike routes
-router.post('/discussion/:id/like', likeDiscussion);
-router.post('/discussion/:id/dislike', dislikeDiscussion);
+router.post('/discussion/:id/like', likeDiscussion); // Like a discussion
+router.post('/discussion/:id/dislike', dislikeDiscussion); // Dislike a discussion
+
+// Add a reply to a discussion
+router.post('/discussion/reply', addReply); // This route will handle adding replies
 
 module.exports = router;
