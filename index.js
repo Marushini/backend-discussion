@@ -12,6 +12,7 @@ const app = express();
 const allowedOrigins = [
     'https://frontend-discussion.vercel.app', 
     'http://localhost:5173',
+    
     'https://frontend-discussion.vercel.app/discussion',
     'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app'
 ];

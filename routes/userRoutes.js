@@ -6,7 +6,12 @@ const router = express.Router();
 
 // CORS options configuration
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://frontend-discussion.vercel.app'],
+    origin: ['http://localhost:5173',
+     'https://frontend-discussion.vercel.app',
+
+    
+    'https://frontend-discussion.vercel.app/discussion',
+    'https://frontend-discussion-bxif0i0jt-marushinis-projects.vercel.app'],
     methods: ['GET', 'POST'],
 };
 
